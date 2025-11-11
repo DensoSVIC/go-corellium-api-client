@@ -1,4 +1,4 @@
-module github.com/aimoda/go-corellium-api-client
+module github.com/DensoSVIC/go-corellium-api-client
 
 go 1.18
 

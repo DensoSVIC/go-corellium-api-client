@@ -19,6 +19,8 @@ var _ MappedNullable = &InstanceBootOptions{}
 
 // InstanceBootOptions 
 type InstanceBootOptions struct {
+	//
+	Cores NullableFloat32 `json:"cores,omitempty"`
 	// 
 	BootArgs NullableString `json:"bootArgs,omitempty"`
 	// 
@@ -52,6 +54,49 @@ func NewInstanceBootOptions() *InstanceBootOptions {
 func NewInstanceBootOptionsWithDefaults() *InstanceBootOptions {
 	this := InstanceBootOptions{}
 	return &this
+}
+
+// GetCores returns the Cores field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InstanceBootOptions) GetCores() float32 {
+	if o == nil || IsNil(o.Cores.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.Cores.Get()
+}
+
+// GetCoresOk returns a tuple with the Cores field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InstanceBootOptions) GetCoresOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cores.Get(), o.Cores.IsSet()
+}
+
+// HasCores returns a boolean if a field has been set.
+func (o *InstanceBootOptions) HasCores() bool {
+	if o != nil && o.Cores.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCores gets a reference to the given NullableFloat32 and assigns it to the Cores field.
+func (o *InstanceBootOptions) SetCores(v float32) {
+	o.Cores.Set(&v)
+}
+
+// SetCoresNil sets the value for Cores to be an explicit nil
+func (o *InstanceBootOptions) SetCoresNil() {
+	o.Cores.Set(nil)
+}
+
+// UnsetCores ensures that no value is present for Cores, not even an explicit nil
+func (o *InstanceBootOptions) UnsetCores() {
+	o.Cores.Unset()
 }
 
 // GetBootArgs returns the BootArgs field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -391,6 +436,9 @@ func (o InstanceBootOptions) MarshalJSON() ([]byte, error) {
 
 func (o InstanceBootOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Cores.IsSet() {
+		toSerialize["cores"] = o.Cores.Get()
+	}
 	if o.BootArgs.IsSet() {
 		toSerialize["bootArgs"] = o.BootArgs.Get()
 	}
